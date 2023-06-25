@@ -2,7 +2,7 @@ node{
 
     def  mavenHome   =  tool name :  'maven3.9.2'
     stage('1-clone the code'){
-        git 'https://github.com/Lion-Technology-Solutions/jenkins-cicd-june17-2023.git'
+        git 'https://github.com/Ogedasilver/jenkins-cicd-june17-2023.git'
 
     }
 
@@ -19,7 +19,7 @@ node{
     }
     stage('deploy-dev'){
         sh "echo 'deploy to dev environment'"
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://44.208.161.47:8009/')], contextPath: 'dev', war: 'target/*.war'
+        deploy adapters: [tomcat9(credentialsId: 'jenkins-tomcat', path: '', url: 'http://54.210.74.225:8009/')], contextPath: 'oge', war: 'target/*.war'
     }
 
     stage('approvalgate'){
@@ -33,7 +33,7 @@ node{
     }
 
     stage('deploy-to-staging'){
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://44.208.161.47:8009/')], contextPath: 'stagin-environment', war: 'target/*.war'
+       deploy adapters: [tomcat9(credentialsId: 'jenkins-tomcat', path: '', url: 'http://54.210.74.225:8009/')], contextPath: 'onyi', war: 'target/*.war'
     }
 
     stage('approvalgate'){
@@ -46,7 +46,7 @@ node{
 
  stage('deploy to prod'){
 
-    deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://44.208.161.47:8009/')], contextPath: 'production-environment', war: 'target/*.war'
+    deploy adapters: [tomcat9(credentialsId: 'jenkins-tomcat', path: '', url: 'http://54.210.74.225:8009/')], contextPath: 'prod', war: 'target/*.war'
  }
 
  stage('send ms teams notification'){
